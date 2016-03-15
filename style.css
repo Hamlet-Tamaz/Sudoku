@@ -1,0 +1,48 @@
+
+h1, td{
+	text-align: center;
+}
+
+table {
+	margin: 0 auto;
+	margin-top: 20px;
+}
+
+.row {
+	height: 25px;
+}
+
+.col {
+	width: 25px;
+}
+
+#inputRow {
+	margin: 0 auto;
+	margin-top: 20px;
+	text-align: center;
+}
+
+#inputRow td {
+	width: 30px;
+	font-weight: bold;
+}
+
+tbody {
+	border: 1px black solid;
+}
+
+#row1, #row4, #row7, #inputRow tr {
+	border-top: 2px solid black;
+}
+
+#row9, #inputRow tr {
+	border-bottom: 2px solid black;
+}
+
+td:nth-child(3) {
+	border-right: 2px solid black;
+}
+
+.perm {
+	font-weight: bold;
+}

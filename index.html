@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="jquery-2.2.1.js"></script>
+	<script src="app.js"></script>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+	
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div id="bodyDiv" class="container">
+	<h1>Hamlet's Sudoku</h1>
+	<table class="table-bordered">
+		<tbody id="Mtbody">
+			<tr id="row1" class="row">
+				<td class="col" data-row="1" data-col="1" data-grp="1"></td>
+				<td class="col" data-row="1" data-col="2" data-grp="1"></td>
+				<td class="col" data-row="1" data-col="3" data-grp="1"></td>
+				<td class="col" data-row="1" data-col="4" data-grp="2"></td>
+				<td class="col" data-row="1" data-col="5" data-grp="2"></td>
+				<td class="col" data-row="1" data-col="6" data-grp="2"></td>
+				<td class="col" data-row="1" data-col="7" data-grp="3"></td>
+				<td class="col" data-row="1" data-col="8" data-grp="3"></td>
+				<td class="col" data-row="1" data-col="9" data-grp="3"></td>
+			</tr>
+			<tr id="row2" class="row">
+				<td class="col" data-row="2" data-col="1" data-grp="1"></td>
+				<td class="col" data-row="2" data-col="2" data-grp="1"></td>
+				<td class="col" data-row="2" data-col="3" data-grp="1"></td>
+				<td class="col" data-row="2" data-col="4" data-grp="2"></td>
+				<td class="col" data-row="2" data-col="5" data-grp="2"></td>
+				<td class="col" data-row="2" data-col="6" data-grp="2"></td>
+				<td class="col" data-row="2" data-col="7" data-grp="3"></td>
+				<td class="col" data-row="2" data-col="8" data-grp="3"></td>
+				<td class="col" data-row="2" data-col="9" data-grp="3"></td>
+			</tr>
+			<tr id="row3" class="row">
+				<td class="col" data-row="3" data-col="1" data-grp="1"></td>
+				<td class="col" data-row="3" data-col="2" data-grp="1"></td>
+				<td class="col" data-row="3" data-col="3" data-grp="1"></td>
+				<td class="col" data-row="3" data-col="4" data-grp="2"></td>
+				<td class="col" data-row="3" data-col="5" data-grp="2"></td>
+				<td class="col" data-row="3" data-col="6" data-grp="2"></td>
+				<td class="col" data-row="3" data-col="7" data-grp="3"></td>
+				<td class="col" data-row="3" data-col="8" data-grp="3"></td>
+				<td class="col" data-row="3" data-col="9" data-grp="3"></td>
+			</tr>
+			<tr id="row4" class="row">
+				<td class="col" data-row="4" data-col="1" data-grp="4"></td>
+				<td class="col" data-row="4" data-col="2" data-grp="4"></td>
+				<td class="col" data-row="4" data-col="3" data-grp="4"></td>
+				<td class="col" data-row="4" data-col="4" data-grp="5"></td>
+				<td class="col" data-row="4" data-col="5" data-grp="5"></td>
+				<td class="col" data-row="4" data-col="6" data-grp="5"></td>
+				<td class="col" data-row="4" data-col="7" data-grp="6"></td>
+				<td class="col" data-row="4" data-col="8" data-grp="6"></td>
+				<td class="col" data-row="4" data-col="9" data-grp="6"></td>
+			</tr>
+			<tr id="row5" class="row">
+				<td class="col" data-row="5" data-col="1" data-grp="4"></td>
+				<td class="col" data-row="5" data-col="2" data-grp="4"></td>
+				<td class="col" data-row="5" data-col="3" data-grp="4"></td>
+				<td class="col" data-row="5" data-col="4" data-grp="5"></td>
+				<td class="col" data-row="5" data-col="5" data-grp="5"></td>
+				<td class="col" data-row="5" data-col="6" data-grp="5"></td>
+				<td class="col" data-row="5" data-col="7" data-grp="6"></td>
+				<td class="col" data-row="5" data-col="8" data-grp="6"></td>
+				<td class="col" data-row="5" data-col="9" data-grp="6"></td>
+			</tr>
+			<tr id="row6" class="row">
+				<td class="col" data-row="6" data-col="1" data-grp="4"></td>
+				<td class="col" data-row="6" data-col="2" data-grp="4"></td>
+				<td class="col" data-row="6" data-col="3" data-grp="4"></td>
+				<td class="col" data-row="6" data-col="4" data-grp="5"></td>
+				<td class="col" data-row="6" data-col="5" data-grp="5"></td>
+				<td class="col" data-row="6" data-col="6" data-grp="5"></td>
+				<td class="col" data-row="6" data-col="7" data-grp="6"></td>
+				<td class="col" data-row="6" data-col="8" data-grp="6"></td>
+				<td class="col" data-row="6" data-col="9" data-grp="6"></td>
+			</tr>
+			<tr id="row7" class="row">
+				<td class="col" data-row="7" data-col="1" data-grp="7"></td>
+				<td class="col" data-row="7" data-col="2" data-grp="7"></td>
+				<td class="col" data-row="7" data-col="3" data-grp="7"></td>
+				<td class="col" data-row="7" data-col="4" data-grp="8"></td>
+				<td class="col" data-row="7" data-col="5" data-grp="8"></td>
+				<td class="col" data-row="7" data-col="6" data-grp="8"></td>
+				<td class="col" data-row="7" data-col="7" data-grp="9"></td>
+				<td class="col" data-row="7" data-col="8" data-grp="9"></td>
+				<td class="col" data-row="7" data-col="9" data-grp="9"></td>
+			</tr>
+			<tr id="row8" class="row">
+				<td class="col" data-row="8" data-col="1" data-grp="7"></td>
+				<td class="col" data-row="8" data-col="2" data-grp="7"></td>
+				<td class="col" data-row="8" data-col="3" data-grp="7"></td>
+				<td class="col" data-row="8" data-col="4" data-grp="8"></td>
+				<td class="col" data-row="8" data-col="5" data-grp="8"></td>
+				<td class="col" data-row="8" data-col="6" data-grp="8"></td>
+				<td class="col" data-row="8" data-col="7" data-grp="9"></td>
+				<td class="col" data-row="8" data-col="8" data-grp="9"></td>
+				<td class="col" data-row="8" data-col="9" data-grp="9"></td>
+			</tr>
+			<tr id="row9" class="row">
+				<td class="col" data-row="9" data-col="1" data-grp="7"></td>
+				<td class="col" data-row="9" data-col="2" data-grp="7"></td>
+				<td class="col" data-row="9" data-col="3" data-grp="7"></td>
+				<td class="col" data-row="9" data-col="4" data-grp="8"></td>
+				<td class="col" data-row="9" data-col="5" data-grp="8"></td>
+				<td class="col" data-row="9" data-col="6" data-grp="8"></td>
+				<td class="col" data-row="9" data-col="7" data-grp="9"></td>
+				<td class="col" data-row="9" data-col="8" data-grp="9"></td>
+				<td class="col" data-row="9" data-col="9" data-grp="9"></td>
+			</tr>
+		</tbody>
+	</table>
+	</div>
+
+	<div id="inputRow" class="container row">
+		<table class="table-bordered">
+			<tbody>
+				<tr class="row">
+					<td>1</td>
+					<td>2</td>
+					<td>3</td>
+					<td>4</td>
+					<td>5</td>
+					<td>6</td>
+					<td>7</td>
+					<td>8</td>
+					<td>9</td>
+					<td id="eraser" class="glyphicon glyphicon-erase"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>
