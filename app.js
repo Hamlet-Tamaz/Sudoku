@@ -32,7 +32,7 @@ function sudokuGen() {
 
 
 //cell high-lighting
-$('#eraser').on('click', cancelHl);
+// $('#eraser').on('click', cancelHl);
 
 function cancelHl(e) {
 	// $('#Mtbody').off('click', cancelHl);
@@ -69,30 +69,43 @@ function highlight(e) {
 
 }
 
+//highlight the number you choose
+$('#inputRow').on('click', 'td', numHl);
+
+function numHl(e) {
+// debugger
+	$(e.target).css("background-color", "yellow");
+	setTimeout(function() {
+		$(e.target).css("background-color", "white");
+	}, 1000);
+}
+
+
 
 //create the input numbers
 $('#inputRow').on("click", numPick);
+
 
 function numPick (e) {
 	var num = e.target.innerText;
 
 	
+	$('#Mtbody').on('click', check);
 	$('#Mtbody').on('click', numAsn);
 
 	function numAsn (e) {
-		if (e.target.className.indexOf("perm") === -1 ) {
+		// debugger
+		if (e.target.className.indexOf("perm") === -1 && e.target.innerText !== num) {
 			$(e.target).text(num);	
 		}
 		$('#Mtbody').off('click', numAsn);
+	
 	}
-
-
-	$('#Mtbody').on('click', check);
 
 
 // n stands for number (ie. row number)
 	function check(e) {
-		var n_inp = Number(e.target.innerText);
+		var n_inp = Number(num);
 		var n_row = Number(e.target.dataset.row);
 		var n_col = Number(e.target.dataset.col);
 		var n_grp = Number(e.target.dataset.grp);
@@ -101,11 +114,14 @@ function numPick (e) {
 		var $col = $(`[data-col=${n_col}]`);
 		var $grp = $(`[data-grp=${n_grp}]`);
 
-		function r_chk(e) {
+		function r_chk() {
 		// debugger
-			if ($.makeArray($row).map(function(v, i) {
-				return Number(e.target.innerText);
-			}).inArray(n_inp)) {
+		// for some reason the funciotn runs twice; 2nd time messes up
+			var x = $.makeArray($row).map(function(v, i) {
+				// I want to make it such that the map skips checking the cell that was just clicked on; if (i === e.)
+				return Number(v.innerText);
+			});
+			if ($.inArray(n_inp, x) !== -1 && e.target.innerText !== num) {
 				return true;
 			}
 			else {
@@ -113,15 +129,43 @@ function numPick (e) {
 			}
 		}
 
-		if (r_chk || c_chk || g_chk) {
-			$row.css("background-color", "yellow");
-			$col.css("background-color", "yellow");
-			$grp.css("background-color", "yellow");
+		function c_chk() {
+			var x = $.makeArray($col).map(function(v, i) {
+				return Number(v.innerText);
+			});
+
+			if ($.inArray(n_inp, x) !== -1 && e.target.innerText !== num) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+
+		function g_chk() {
+			var x = $.makeArray($grp).map(function(v, i) {
+				return Number(v.innerText);
+			});
+
+			if ($.inArray(n_inp, x) !== -1 && e.target.innerText !== num) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+
+		if (r_chk(e)|| c_chk() || g_chk()) { 
+			$row.css("background-color", "orange");
+			$col.css("background-color", "orange");
+			$grp.css("background-color", "orange");
 		}
 		else {
 			$('td').css('background-color', 'white');
 		}
+	$('#Mtbody').off('click', check);
 	}
+
 }
 
 

@@ -29,6 +29,7 @@ table {
 
 tbody {
 	border: 1px black solid;
+	cursor: pointer;
 }
 
 #row1, #row4, #row7, #inputRow tr {
