@@ -1,11 +1,21 @@
-
+/*
 h1, td{
 	text-align: center;
+}*/
+
+#bodyDiv {
+	text-align: center;
 }
+
 
 table {
 	margin: 0 auto;
 	margin-top: 20px;
+}
+
+tbody {
+	border: 1px black solid;
+	cursor: pointer;
 }
 
 .row {
@@ -27,11 +37,15 @@ table {
 	font-weight: bold;
 }
 
-tbody {
-	border: 1px black solid;
-	cursor: pointer;
+.perm {
+	font-weight: bold;
 }
 
+#startGame {
+	margin: 10px;
+}
+
+/* SETTING UP BORDERS */
 #row1, #row4, #row7, #inputRow tr {
 	border-top: 2px solid black;
 }
@@ -42,8 +56,4 @@ tbody {
 
 td:nth-child(3) {
 	border-right: 2px solid black;
-}
-
-.perm {
-	font-weight: bold;
 }

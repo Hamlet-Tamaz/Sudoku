@@ -7,10 +7,31 @@ var baseChk = [];
 var difficulty = 0.5;
 
 
+$('#difficulty').on('click', 'button', chooseD);
+
+function chooseD(e) {
+	debugger
+	if (e.target.innerText === "Easy") {
+		difficulty = 0.7;
+	}
+	else if (e.target.innerText === "Medium") {
+		difficulty = 0.5;
+	}
+	else if (e.target.innerText === "Hard") {
+		difficulty = 0.3;
+	}
+
+	$('#difficulty').css('display', 'none');
+}
+
+
+$('#startGame').on('click', initialize);
+
 //initialization stage
-(function initialize() {
+function initialize() {
 	sudokuGen();
-})();
+	$('#startGame').off('click', initialize);
+};
 
 
 //create the deck
@@ -27,6 +48,9 @@ function sudokuGen() {
 			}
 		});
 	});
+
+//gets rid of difficulty section if you didn't choose a difficulty when starting 
+	$('#difficulty').css('display', 'none');
 
 }
 
