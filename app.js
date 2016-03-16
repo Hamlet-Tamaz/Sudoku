@@ -4,13 +4,16 @@ $(document).ready(function() {
 //variable declarations and initial assignments
 var base = [[1,2,3,4,5,6,7,8,9],[4,5,6,7,8,9,1,2,3],[7,8,9,1,2,3,4,5,6],[2,3,4,5,6,7,8,9,1],[5,6,7,8,9,1,2,3,4],[8,9,1,2,3,4,5,6,7],[3,4,5,6,7,8,9,1,2],[6,7,8,9,1,2,3,4,5],[9,1,2,3,4,5,6,7,8]];
 var baseChk = [];
-var difficulty = 0.5;
+var hsArray = JSON.parse(localStorage.getItem("High Scores")) || [];
+var nScore = {};
+var difficulty = 0.015;
+var gCount = 0;
 
 
 $('#difficulty').on('click', 'button', chooseD);
 
 function chooseD(e) {
-	debugger
+	// debugger
 	if (e.target.innerText === "Easy") {
 		difficulty = 0.7;
 	}
@@ -25,13 +28,69 @@ function chooseD(e) {
 }
 
 
-$('#startGame').on('click', initialize);
+//reset button
+$('#reset').on('click', reset);
+
+function reset(e) {
+	localStorage.removeItem("High Scores");
+
+	window.location.reload();
+}
+
+//setting HS in list
+function settingHS() {
+	$('#highScoreList').empty();
+
+	if (localStorage.getItem("High Scores")) {
+		JSON.parse(localStorage.getItem("High Scores")).forEach(printToHS);
+	}
+
+	function printToHS(el, i) {
+
+		var hsName = el.name;
+		var hsTime = el.time;
+
+		var newScore = `<li>${hsName}: ${hsTime}</li>`;
+		$('#highScoreList').append(newScore);
+	}
+}
+settingHS();		
+
 
 //initialization stage
+$('#startGame').on('click', initialize);
+
 function initialize() {
 	sudokuGen();
+	timer();
+		// localStorage.setItem("nGames", JSON.stringify(gCount));
+
 	$('#startGame').off('click', initialize);
-};
+}
+
+//Create/Setup timer
+var h1 = document.getElementById('timer'),
+    seconds = 0, minutes = 0, hours = 0,
+    t;
+
+function add() {
+    seconds++;
+    if (seconds >= 60) {
+        seconds = 0;
+        minutes++;
+        if (minutes >= 60) {
+            minutes = 0;
+            hours++;
+        }
+    }
+    
+    h1.textContent = (hours ? (hours > 9 ? hours : "0" + hours) : "00") + ":" + (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
+
+    timer();
+}
+function timer() {
+    t = setTimeout(add, 1000);
+}
 
 
 //create the deck
@@ -98,6 +157,7 @@ $('#inputRow').on('click', 'td', numHl);
 
 function numHl(e) {
 // debugger
+	// $('#inputRow').css('background-color', 'white');
 	$(e.target).css("background-color", "yellow");
 	setTimeout(function() {
 		$(e.target).css("background-color", "white");
@@ -123,8 +183,57 @@ function numPick (e) {
 			$(e.target).text(num);	
 		}
 		$('#Mtbody').off('click', numAsn);
-	
+		
+		//figuring out when game ends
+		function gameEndCheck() {
+			debugger
+			// var currentNumbers = $.makeArray($('#Mtbody td')).map(function(el, i) {
+			// 	return Number(el.innerText);
+			// });
+
+			// var arraysMatch = base.reduce(function(acc, el, i) {
+			// 	if (el !== currentNumbers[i]) {
+			// 		return false;
+			// 	}
+
+			// 	return acc;
+			// }, true);
+
+			// return arraysMatch;
+
+			if ($.makeArray($('#Mtbody td')).map(function(el, i) {
+				return Number(el.innerText);
+			}).reduce(function(s, n, i) {return s += n; }) === 405) {
+				return true;
+			}
+			else { return false;}
+		}
+
+		if (gameEndCheck()) {
+			alert("YOU WIN!!");
+			
+			(function() {
+    		clearTimeout(t);})();
+		
+			// gCount++;
+			// localStorage.setItem("nGames", JSON.stringify(gCount));
+			// localStorage.setItem(`Game ${localStorage.getItem("nGames")}:`, $('time').text());
+
+
+			//storing the win times in storage & displaying in high score list
+			var name = prompt("What is your name?");
+
+			nScore.name = name;
+			nScore.time = $('time').text();
+
+			hsArray.push(nScore);
+
+				localStorage.setItem("High Scores", JSON.stringify(hsArray));
+
+			//print to HS list
+			settingHS();
 	}
+}
 
 
 // n stands for number (ie. row number)
