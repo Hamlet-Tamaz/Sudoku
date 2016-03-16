@@ -63,7 +63,7 @@ $('#startGame').on('click', initialize);
 function initialize() {
 	sudokuGen();
 	timer();
-		// localStorage.setItem("nGames", JSON.stringify(gCount));
+
 
 	$('#startGame').off('click', initialize);
 }
@@ -95,6 +95,14 @@ function timer() {
 
 //create the deck
 function sudokuGen() {
+	//clears the field of initial sudoku grid
+$('#Mtbody td').empty();
+	//remove "perm" class from all td's before adding new settings
+$.makeArray($('#Mtbody td')).forEach(function(el, i) { $(el).removeClass("perm"); });
+	//reset timer
+(function() { h1.textContent = "00:00:00"; seconds = 0; minutes = 0; hours = 0;})();
+	//set background white
+$('td').css("background-color", "white");
 
 	base.forEach(function(el_arr, i){
 		el_arr.forEach(function(el, j) {
@@ -171,6 +179,7 @@ $('#inputRow').on("click", numPick);
 
 
 function numPick (e) {
+	debugger
 	var num = e.target.innerText;
 
 	
@@ -186,7 +195,7 @@ function numPick (e) {
 		
 		//figuring out when game ends
 		function gameEndCheck() {
-			debugger
+			// debugger
 			// var currentNumbers = $.makeArray($('#Mtbody td')).map(function(el, i) {
 			// 	return Number(el.innerText);
 			// });
@@ -215,9 +224,6 @@ function numPick (e) {
 			(function() {
     		clearTimeout(t);})();
 		
-			// gCount++;
-			// localStorage.setItem("nGames", JSON.stringify(gCount));
-			// localStorage.setItem(`Game ${localStorage.getItem("nGames")}:`, $('time').text());
 
 
 			//storing the win times in storage & displaying in high score list
@@ -232,6 +238,10 @@ function numPick (e) {
 
 			//print to HS list
 			settingHS();
+
+			//turn "play" button back on
+			$('#startGame').on('click', initialize);
+
 	}
 }
 

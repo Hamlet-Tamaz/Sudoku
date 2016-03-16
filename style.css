@@ -45,6 +45,10 @@ tbody {
 	margin: 10px;
 }
 
+#highScoreList li {
+	margin: 5px;
+}
+
 /* SETTING UP BORDERS */
 #row1, #row4, #row7, #inputRow tr {
 	border-top: 2px solid black;
