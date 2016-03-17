@@ -1,8 +1,109 @@
 $(document).ready(function() {
+	
+
+function swapEls(arr, iA, iB) {
+  var temp = arr[iA];
+  arr[iA] = arr[iB];
+  arr[iB] = temp;
+};
 
 
+var basic = [[1,2,3,4,5,6,7,8,9],[4,5,6,7,8,9,1,2,3],[7,8,9,1,2,3,4,5,6],[2,3,4,5,6,7,8,9,1],[5,6,7,8,9,1,2,3,4],[8,9,1,2,3,4,5,6,7],[3,4,5,6,7,8,9,1,2],[6,7,8,9,1,2,3,4,5],[9,1,2,3,4,5,6,7,8]];
+
+
+//grid randomization
+
+var base = basic;
+
+//shift rows
+base.forEach(function (el, i) {
+
+	if (i === 0 || i === 1 || i === 2) {
+		
+		var a = Math.floor(Math.random() * 3);
+		var b = Math.floor(Math.random() * 3);
+
+		swapEls(base, a, b);
+	}
+	else if (i === 3 || i === 4 || i === 5) {
+		var a = Math.floor(Math.random() * 3) + 3;
+		var b = Math.floor(Math.random() * 3) + 3;
+
+		swapEls(base, a, b);
+	}
+	else if (i === 6 || i === 7 || i === 8) {
+		var a = Math.floor(Math.random() * 3) + 6;
+		var b = Math.floor(Math.random() * 3) + 6;
+
+		swapEls(base, a, b);
+	}
+
+});
+
+//shift cols
+base.forEach(function (el, i) {
+
+
+	el.forEach(function (val, j){ 
+
+		// var temp = $(`[data-col=${i + 1}]`);
+		// $.makeArray($(`[data-col=${i + 1}]`))
+
+
+		if ($('[data-col') === 0 || $('[data-col') === 1 || $('[data-col') === 2) {
+			
+			var a = Math.floor(Math.random() * 3);
+			var b = Math.floor(Math.random() * 3);
+
+			swapEls(el, a, b);
+		}
+		else if ($('[data-col') === 3 || $('[data-col') === 4 || $('[data-col') === 5) {
+			var a = Math.floor(Math.random() * 3) + 3;
+			var b = Math.floor(Math.random() * 3) + 3;
+
+			swapEls(el, a, b);
+		}
+		else if ($('[data-col') === 6 || $('[data-col') === 7 || $('[data-col') === 8) {
+			var a = Math.floor(Math.random() * 3) + 6;
+			var b = Math.floor(Math.random() * 3) + 6;
+
+			swapEls(el, a, b);
+		}
+	});
+});
+
+
+//switch numbers' places
+[1,2,3,4,5,6,7,8,9].forEach(function (num, idx) {
+		var k = Math.floor(Math.random() * 9) + 1;
+		var temp = num;
+// debugger
+		base.forEach(function(arr) {
+			var temp1 = "fill";
+			arr[arr.lastIndexOf(k)] = temp1;
+			arr[arr.indexOf(temp)] = k;
+			arr[arr.lastIndexOf("fill")] = temp;
+		});
+});
+
+// base.forEach(function (el, i) {
+
+
+// 	el.forEach(function (val, j){ 
+		
+// 		
+// 			var temp = val;
+// 			val = k;
+
+
+// 		}
+// 	});
+// });
+
+
+// debugger
 //variable declarations and initial assignments
-var base = [[1,2,3,4,5,6,7,8,9],[4,5,6,7,8,9,1,2,3],[7,8,9,1,2,3,4,5,6],[2,3,4,5,6,7,8,9,1],[5,6,7,8,9,1,2,3,4],[8,9,1,2,3,4,5,6,7],[3,4,5,6,7,8,9,1,2],[6,7,8,9,1,2,3,4,5],[9,1,2,3,4,5,6,7,8]];
+// var base = [[1,2,3,4,5,6,7,8,9],[4,5,6,7,8,9,1,2,3],[7,8,9,1,2,3,4,5,6],[2,3,4,5,6,7,8,9,1],[5,6,7,8,9,1,2,3,4],[8,9,1,2,3,4,5,6,7],[3,4,5,6,7,8,9,1,2],[6,7,8,9,1,2,3,4,5],[9,1,2,3,4,5,6,7,8]];
 var baseChk = [];
 var hsArray = JSON.parse(localStorage.getItem("High Scores")) || [];
 var nScore = {};
@@ -27,14 +128,18 @@ function chooseD(e) {
 	$('#difficulty').css('display', 'none');
 }
 
+//giveup button
+$('#giveUp').on('click', giveUp);
+
+function giveUp(e) {
+	window.location.reload();
+}
 
 //reset button
 $('#reset').on('click', reset);
 
 function reset(e) {
 	localStorage.removeItem("High Scores");
-
-	window.location.reload();
 }
 
 //setting HS in list
@@ -95,6 +200,8 @@ function timer() {
 
 //create the deck
 function sudokuGen() {
+	//reset game score
+	nScore = {};
 	//clears the field of initial sudoku grid
 $('#Mtbody td').empty();
 	//remove "perm" class from all td's before adding new settings
@@ -104,12 +211,13 @@ $.makeArray($('#Mtbody td')).forEach(function(el, i) { $(el).removeClass("perm")
 	//set background white
 $('td').css("background-color", "white");
 
+// debugger
 	base.forEach(function(el_arr, i){
 		el_arr.forEach(function(el, j) {
 			baseChk.push(el);
 			
 			if (Math.random() > difficulty) {
-				var cell = $(`tr:nth-child(${i+1}) > td:nth-child(${j+1})`)
+				var cell = $(`#Mtbody > tr:nth-child(${i+1}) > td:nth-child(${j+1})`)
 				cell.text(el);
 				cell.addClass('perm');
 			}
@@ -179,7 +287,7 @@ $('#inputRow').on("click", numPick);
 
 
 function numPick (e) {
-	debugger
+	// debugger
 	var num = e.target.innerText;
 
 	
@@ -219,7 +327,8 @@ function numPick (e) {
 		}
 
 		if (gameEndCheck()) {
-			alert("YOU WIN!!");
+			// alert("YOU WIN!!");
+
 			
 			(function() {
     		clearTimeout(t);})();
@@ -238,6 +347,13 @@ function numPick (e) {
 
 			//print to HS list
 			settingHS();
+
+			//winning Banner
+			// var winBanner = "<p id='winner'>You Win!!!</p>";
+			// $('body').append(winBanner);
+			$('#winner').css('visibility', 'visible');
+			// debugger
+			// $('body').on("click", function() {$('#winner').css('visibility', 'hidden');});
 
 			//turn "play" button back on
 			$('#startGame').on('click', initialize);

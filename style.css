@@ -49,6 +49,24 @@ tbody {
 	margin: 5px;
 }
 
+#reset {
+	margin-top: 10px;
+}
+
+#winner {
+	position: absolute;
+	visibility: hidden;
+	text-align: center;
+	font-size: 100px;
+	height: 42vh;
+	width: 65%;
+	top: 170px;
+	left: 120px;
+	z-index: 1;
+	background-color: red;
+
+}
+
 /* SETTING UP BORDERS */
 #row1, #row4, #row7, #inputRow tr {
 	border-top: 2px solid black;
