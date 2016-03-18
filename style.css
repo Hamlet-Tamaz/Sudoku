@@ -35,11 +35,13 @@ tbody {
 #inputRow td {
 	height: 50px;
 	width: 50px;
+}
+#inputRow td .inputVal {	
 	font-weight: bold;
 	font-size: 20px;
 }
 
-#inputRow td span {
+#inputRow td .numsLeft {
 	font-size: 12px;
 	position: relative;
 	top: -15px;

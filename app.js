@@ -282,7 +282,12 @@ function highlight(e) {
 
 		function numBold(el, i) {
 			if (num === $(el).text()) {
+				if ($(el).css("background-color") === "rgba(143, 194, 249, 0.6)") {
+					$(el).css("background-color", "white");
+				}
+				else {
 				$(el).css("background-color", "rgba(143, 194, 249, 0.6)");
+				}
 			}
 		}
 	}
@@ -294,10 +299,10 @@ $('#inputRow').on('click', 'td', numHl);
 function numHl(e) {
 // debugger
 	// $('#inputRow').css('background-color', 'white');
-	$(e.target).css("background-color", "rgb(247, 249, 143)");
+	$(this).css("background-color", "rgb(247, 249, 143)");
 	setTimeout(function() {
-		$(e.target).css("background-color", "white");
-	}, 1000);
+		$(this).css("background-color", "white");
+	}.bind(this), 1000);
 }
 
 
@@ -312,7 +317,7 @@ function numPick (e) {
 		var num = this.innerText[0];	
 	}
 	else {
-		var num = "  ";
+		var num = "10";
 	}
 
 	
@@ -325,7 +330,12 @@ function numPick (e) {
 		//check if cell clicked isn't "perm" and we're not clicking the same thing
 		if (e.target.className.indexOf("perm") === -1 && e.target.innerText !== num) {
 			//insert number in cell
-			$(e.target).text(num);	
+			if (num === 10) {
+				num = "";
+			}
+			else {
+				$(e.target).text(num);	
+			}
 		}
 		//check how many of each number is left
 		numsLeft();
@@ -416,6 +426,12 @@ function winner(e) {
 		// for some reason the funciotn runs twice; 2nd time messes up
 			var x = $.makeArray($row).map(function(v, i) {
 				// I want to make it such that the map skips checking the cell that was just clicked on; if (i === e.)
+				// if (Number(v.innerText) === 0) {
+				// 	return 10;
+				// }
+				// else {
+				// 	return Number(v.innerText);
+				// }
 				return Number(v.innerText);
 			});
 			if ($.inArray(n_inp, x) !== -1 && e.target.innerText !== num) {
