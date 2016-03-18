@@ -63,6 +63,13 @@ tbody {
 	margin-top: 10px;
 }
 
+#eraser {
+	position: relative;
+	top: 0;
+	line-height: 2;
+	font-size: x-large;
+}
+
 #winner{
 	position: absolute;
 	visibility: hidden;
