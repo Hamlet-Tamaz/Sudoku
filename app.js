@@ -330,12 +330,11 @@ function numPick (e) {
 		//check if cell clicked isn't "perm" and we're not clicking the same thing
 		if (e.target.className.indexOf("perm") === -1 && e.target.innerText !== num) {
 			//insert number in cell
-			if (num === 10) {
+			if (num === "10") {
 				num = "";
 			}
-			else {
-				$(e.target).text(num);	
-			}
+			
+			$(e.target).text(num);	
 		}
 		//check how many of each number is left
 		numsLeft();
