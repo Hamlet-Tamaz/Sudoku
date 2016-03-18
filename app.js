@@ -264,7 +264,7 @@ function highlight(e) {
 	var $col = $(`[data-col=${n_col}]`);
 	var $grp = $(`[data-grp=${n_grp}]`);
 
-	if ($row.css("background-color") === yellow && $col.css("background-color") === yellow && $grp.css("background-color") === yellow) {	
+	if ($($row[- n_row]).css("background-color") === yellow && $($col[- n_col]).css("background-color") === yellow && $($grp[- n_grp]).css("background-color") === yellow) {	
 		
 		$('td').css("background-color", "white");
 	}
