@@ -271,9 +271,9 @@ function highlight(e) {
 	else {
 		$('td').css("background-color", "white");
 		
-		$row.css("background-color", "rgb(247, 249, 143)");
-		$col.css("background-color", "rgb(247, 249, 143)");
-		$grp.css("background-color", "rgb(247, 249, 143)");
+		$row.css("background-color", yellow);
+		$col.css("background-color", yellow);
+		$grp.css("background-color", yellow);
 	}
 
 	if ($(e.target).text()) {
