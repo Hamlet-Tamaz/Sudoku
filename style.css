@@ -33,8 +33,16 @@ tbody {
 }
 
 #inputRow td {
-	width: 30px;
+	height: 50px;
+	width: 50px;
 	font-weight: bold;
+	font-size: 20px;
+}
+
+#inputRow td span {
+	font-size: 12px;
+	position: relative;
+	top: -15px;
 }
 
 .perm {
@@ -53,19 +61,23 @@ tbody {
 	margin-top: 10px;
 }
 
-#winner {
+#winner{
 	position: absolute;
 	visibility: hidden;
 	text-align: center;
-	font-size: 100px;
 	height: 42vh;
 	width: 65%;
 	top: 170px;
 	left: 120px;
 	z-index: 1;
-	background-color: red;
-
+	background-color: rgba(255,0,0,0.8);
+	border-radius: 25px;
 }
+
+#winner #winnerP{
+	font-size: 100px;
+}
+
 
 /* SETTING UP BORDERS */
 #row1, #row4, #row7, #inputRow tr {
@@ -76,6 +88,7 @@ tbody {
 	border-bottom: 2px solid black;
 }
 
-td:nth-child(3) {
+table > #Mtbody > tr [data-col="3"], table > #Mtbody > tr [data-col="6"] {
 	border-right: 2px solid black;
 }
+
