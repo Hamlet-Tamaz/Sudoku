@@ -1,6 +1,8 @@
 # Sudoku
 
-This is my implementation of the game of Sudoku! I wanted to create a version of Sudoku with all basic features including: 
+This is my implementation of the game of Sudoku! I wanted to create a version of Sudoku with all basic features including those listed below. Note that the algorithm that sets a new game each time, based on the difficulty selected, was also created by me. The application uses Javasctipt, jQuery, and Bootstrap.
+
+##Features
 
 - 3 levels of difficulty 
 - Highlighting of row, column, and section 
