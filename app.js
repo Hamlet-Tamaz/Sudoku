@@ -1,27 +1,21 @@
 $(document).ready(function() {
 	
-
 function swapEls(arr, iA, iB) {
   var temp = arr[iA];
   arr[iA] = arr[iB];
   arr[iB] = temp;
 }
 
-
 var basic = [[1,2,3,4,5,6,7,8,9],[4,5,6,7,8,9,1,2,3],[7,8,9,1,2,3,4,5,6],[2,3,4,5,6,7,8,9,1],[5,6,7,8,9,1,2,3,4],[8,9,1,2,3,4,5,6,7],[3,4,5,6,7,8,9,1,2],[6,7,8,9,1,2,3,4,5],[9,1,2,3,4,5,6,7,8]];
 
 var base = basic;
 
 //grid randomization
-
 function gridRandomization() {
-
-
 	//shift rows
 	base.forEach(function (el, i) {
 
 		if (i === 0 || i === 1 || i === 2) {
-			
 			var a = Math.floor(Math.random() * 3);
 			var b = Math.floor(Math.random() * 3);
 
@@ -44,16 +38,8 @@ function gridRandomization() {
 
 	//shift cols
 	base.forEach(function (el, i) {
-
-
 		el.forEach(function (val, j){ 
-
-			// var temp = $(`[data-col=${i + 1}]`);
-			// $.makeArray($(`[data-col=${i + 1}]`))
-
-
 			if ($('[data-col') === 0 || $('[data-col') === 1 || $('[data-col') === 2) {
-				
 				var a = Math.floor(Math.random() * 3);
 				var b = Math.floor(Math.random() * 3);
 
@@ -74,36 +60,28 @@ function gridRandomization() {
 		});
 	});
 
-
 	//switch numbers' places
 	[1,2,3,4,5,6,7,8,9].forEach(function (num, idx) {
-			var k = Math.floor(Math.random() * 9) + 1;
-			var temp = num;
-	// debugger
-			base.forEach(function(arr) {
-				var temp1 = "fill";
-				arr[arr.lastIndexOf(k)] = temp1;
-				arr[arr.indexOf(temp)] = k;
-				arr[arr.lastIndexOf("fill")] = temp;
-			});
+		var k = Math.floor(Math.random() * 9) + 1;
+		var temp = num;
+
+		base.forEach(function(arr) {
+			var temp1 = "fill";
+			arr[arr.lastIndexOf(k)] = temp1;
+			arr[arr.indexOf(temp)] = k;
+			arr[arr.lastIndexOf("fill")] = temp;
+		});
 	});
 }
 
-
-// debugger
-//variable declarations and initial assignments
-// var base = [[1,2,3,4,5,6,7,8,9],[4,5,6,7,8,9,1,2,3],[7,8,9,1,2,3,4,5,6],[2,3,4,5,6,7,8,9,1],[5,6,7,8,9,1,2,3,4],[8,9,1,2,3,4,5,6,7],[3,4,5,6,7,8,9,1,2],[6,7,8,9,1,2,3,4,5],[9,1,2,3,4,5,6,7,8]];
 var baseChk = [];
 var hsArray = JSON.parse(localStorage.getItem("High Scores")) || [];
 var nScore = {};
 var difficulty = 0.015;
-var gCount = 0;
-
 
 $('#difficulty').on('click', 'button', chooseDif);
 
 function chooseDif(e) {
-	// debugger
 	if (e.target.innerText === "Easy") {
 		difficulty = 0.55;
 	}
@@ -141,7 +119,6 @@ function settingHS() {
 	}
 
 	function printToHS(el, i) {
-
 		var hsName = el.name;
 		var hsTime = el.time;
 
@@ -158,7 +135,6 @@ $('#startGame').on('click', initialize);
 function initialize() {
 	sudokuGen();
 	timer();
-
 
 	$('#startGame').off('click', initialize);
 }
@@ -206,7 +182,6 @@ function sudokuGen() {
 	$('#inputRow').on("click", "td", numPick);
 
 
-// debugger
 	base.forEach(function(el_arr, i){
 		el_arr.forEach(function(el, j) {
 			baseChk.push(el);
@@ -219,7 +194,7 @@ function sudokuGen() {
 		});
 	});
 
-//gets rid of difficulty section if you didn't choose a difficulty when starting 
+	//gets rid of difficulty section if you didn't choose a difficulty when starting 
 	$('#difficulty').css('display', 'none');
 
 	numsLeft();
@@ -228,7 +203,6 @@ function sudokuGen() {
 function numsLeft() {
 	$.makeArray($('.numsLeft')).forEach(
 		function(el, i) {
-			// debugger
 			var inputVal = el.parentNode.innerText[0];
 			var howMany = $.makeArray($('#Mtbody td')).filter(function(el, i) {
 				return $(el).text() === inputVal;
@@ -238,16 +212,14 @@ function numsLeft() {
 		});
 }
 
+
 //ERASER cell high-lighting
 $('#eraser').on('click', cancelHl);
 
-
 function cancelHl(e) {
-	// $('#Mtbody').off('click', cancelHl);
 	$('td').css("background-color", "white");
 
 }
-
 
 
 $('#Mtbody').on('click', highlight);
@@ -297,35 +269,23 @@ function highlight(e) {
 $('#inputRow').on('click', 'td', numHl);
 
 function numHl(e) {
-// debugger
-	// $('#inputRow').css('background-color', 'white');
 	$(this).css("background-color", "rgb(247, 249, 143)");
 	setTimeout(function() {
 		$(this).css("background-color", "white");
 	}.bind(this), 1000);
 }
 
-
-
-//create the input numbers
-// $('#inputRow').on("click", numPick);
-
-
 function numPick (e) {
-	debugger
 	if (this.innerText[0]) {
 		var num = this.innerText[0];	
-	}
-	else {
+	} else {
 		var num = "10";
 	}
 
-	
 	$('#Mtbody').on('click', check);
 	$('#Mtbody').on('click', numAsn);
 
 	function numAsn (e) {
-		// debugger
 
 		//check if cell clicked isn't "perm" and we're not clicking the same thing
 		if (e.target.className.indexOf("perm") === -1 && e.target.innerText !== num) {
@@ -342,21 +302,6 @@ function numPick (e) {
 		
 		//figuring out when game ends
 		function gameEndCheck() {
-			// debugger
-			// var currentNumbers = $.makeArray($('#Mtbody td')).map(function(el, i) {
-			// 	return Number(el.innerText);
-			// });
-
-			// var arraysMatch = base.reduce(function(acc, el, i) {
-			// 	if (el !== currentNumbers[i]) {
-			// 		return false;
-			// 	}
-
-			// 	return acc;
-			// }, true);
-
-			// return arraysMatch;
-
 			if ($.makeArray($('#Mtbody td')).map(function(el, i) {
 				return Number(el.innerText);
 			}).reduce(function(s, n, i) {return s += n; }) === 405) {
@@ -366,21 +311,18 @@ function numPick (e) {
 		}
 
 		if (gameEndCheck()) {
-
 			//stops time
-    	clearTimeout(t);
-		
+			clearTimeout(t);
 			//winning Banner
 			$('#winner').css('visibility', 'visible');
 			$('#winner').on("click", winner); 
 		}
 }
 
-function winner(e) {
-	//hides winner banner
-
+function winner(e) {	
 	//asks for player name and set high score
 	var name = prompt("What is your name?") || "Guest";
+	//hides winner banner
 	$('#winner').css('visibility', 'hidden');
 	//hides any highlighting
 	$('td').css("background-color", "white");
@@ -388,28 +330,23 @@ function winner(e) {
 	
 
 	//storing the win times in storage & displaying in high score list
-
 	nScore.name = name;
 	nScore.time = $('time').text();
 
-
-		localStorage.setItem("High Scores", JSON.stringify(hsArray));
+	localStorage.setItem("High Scores", JSON.stringify(hsArray));
 
 	//print to HS list
 	settingHS();
-
 
 	//turns off event listeners of the inputRow and Body
 	$('#inputRow').off("click", numPick);
 	$('#winner').off("click", winner);				
 
-
 	//turn "play" button back on
 	$('#startGame').on('click', initialize);
 	}
 
-
-// n stands for number (ie. row number)
+	// n stands for number (ie. row number)
 	function check(e) {
 		var n_inp = Number(num);
 		var n_row = Number(e.target.dataset.row);
@@ -420,19 +357,23 @@ function winner(e) {
 		var $col = $(`[data-col=${n_col}]`);
 		var $grp = $(`[data-grp=${n_grp}]`);
 
+		if (r_chk(e)|| c_chk() || g_chk()) { 
+			$row.css("background-color", "orange");
+			$col.css("background-color", "orange");
+			$grp.css("background-color", "orange");
+		}
+		else {
+			$('td').css('background-color', 'white');
+		}
+		
+		$('#Mtbody').off('click', check);
+
 		function r_chk() {
-		// debugger
 		// for some reason the funciotn runs twice; 2nd time messes up
 			var x = $.makeArray($row).map(function(v, i) {
-				// I want to make it such that the map skips checking the cell that was just clicked on; if (i === e.)
-				// if (Number(v.innerText) === 0) {
-				// 	return 10;
-				// }
-				// else {
-				// 	return Number(v.innerText);
-				// }
 				return Number(v.innerText);
 			});
+			var x = $.makeArray($row).map(v => Number(v.innerText));
 			if ($.inArray(n_inp, x) !== -1 && e.target.innerText !== num) {
 				return true;
 			}
@@ -466,28 +407,7 @@ function winner(e) {
 				return false;
 			}
 		}
-
-		if (r_chk(e)|| c_chk() || g_chk()) { 
-			$row.css("background-color", "orange");
-			$col.css("background-color", "orange");
-			$grp.css("background-color", "orange");
-		}
-		else {
-			$('td').css('background-color', 'white');
-		}
-	$('#Mtbody').off('click', check);
 	}
-
 }
-
-
-
-
-
-
-
-
-
-
 
 });
