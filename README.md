@@ -1,5 +1,7 @@
 # Sudoku
 
+https://hamlet-sudoku.netlify.app/
+
 This is my implementation of the game of Sudoku! I wanted to create a version of Sudoku with all basic features including those listed below. Note that the algorithm that sets a new game each time, based on the difficulty selected, was also created by me. The application uses Javasctipt, jQuery, and Bootstrap.
 
 ##Features
